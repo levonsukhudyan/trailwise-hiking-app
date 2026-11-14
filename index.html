@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f4">
+    <title>TrailWise — Find a trail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="data.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="demo-banner"><span class="demo-dot" aria-hidden="true"></span> Trail information uses sample records. Park alerts can be loaded from the official NPS API.</div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="TrailWise home"><span class="brand-mark" aria-hidden="true">↗</span>TrailWise</a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#trails">Explore</a>
+        <a class="nav-link" href="#trail-detail">Trail details</a>
+      </nav>
+      <div class="header-meta"><span class="location-mark" aria-hidden="true">●</span> Pacific Northwest <span class="avatar" aria-label="Guest profile">G</span></div>
+    </header>
+
+    <main id="top" class="page-shell">
+      <section class="intro-row" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">YOUR NEXT OUTDOOR DAY</p>
+          <h1 id="page-title">Find a trail that fits.</h1>
+          <p class="intro-copy">Explore nearby routes, compare the details, and choose a hike that feels right for you.</p>
+        </div>
+        <div class="weather-chip"><span aria-hidden="true">☼</span><span><b>Plan with care</b><small>Check official sources before you go</small></span></div>
+      </section>
+
+      <section id="trails" class="search-panel" aria-label="Search and filter trails">
+        <label class="search-field" for="location-search">
+          <span class="field-icon" aria-hidden="true">⌕</span>
+          <span class="sr-only">Search by trail or location</span>
+          <input id="location-search" type="search" placeholder="Search trails or locations" value="North Bend, WA" autocomplete="off">
+          <button id="clear-search" class="clear-button" type="button" aria-label="Clear search">×</button>
+        </label>
+        <label class="select-field"><span>Difficulty</span>
+          <select id="difficulty-filter" aria-label="Filter by difficulty">
+            <option value="all">Any level</option><option value="easy">Easy</option><option value="moderate">Moderate</option><option value="hard">Hard</option>
+          </select>
+        </label>
+        <label class="select-field"><span>Distance</span>
+          <select id="distance-filter" aria-label="Maximum trail distance">
+            <option value="all">Any distance</option><option value="3">Under 3 mi</option><option value="5">Under 5 mi</option><option value="8">Under 8 mi</option>
+          </select>
+        </label>
+        <button id="reset-filters" class="reset-button" type="button">Reset</button>
+      </section>
+
+      <div class="results-heading">
+        <div><p class="eyebrow">TRAIL DISCOVERY</p><h2>Trails near you <span id="result-count" class="count-pill">0</span></h2></div>
+        <label class="sort-control">Sort by <select id="sort-filter" aria-label="Sort trails"><option value="recommended">Best fit</option><option value="distance">Shortest distance</option><option value="difficulty">Difficulty</option></select></label>
+      </div>
+
+      <div class="workspace-grid">
+        <section class="results-column" aria-label="Trail results">
+          <div id="trail-list" class="trail-list" aria-live="polite"></div>
+          <div id="empty-state" class="empty-state" hidden>
+            <span class="empty-icon" aria-hidden="true">⌕</span><h3>No trails match these filters</h3><p>Try another location or broaden your distance and difficulty choices.</p><button id="empty-reset" class="button button-secondary" type="button">Clear filters</button>
+          </div>
+          <p class="result-note"><span class="info-icon" aria-hidden="true">i</span> Example trails are shown to demonstrate the prototype. Details have not been checked against live sources.</p>
+        </section>
+
+        <section id="trail-detail" class="detail-panel" aria-labelledby="detail-title" aria-live="polite">
+          <div class="detail-topline"><span class="detail-label">TRAIL DETAILS</span><button id="save-trail" class="save-button" type="button" aria-pressed="false"><span aria-hidden="true">♡</span> <span>Save</span></button></div>
+          <h2 id="detail-title">Choose a trail</h2>
+          <p id="detail-location" class="detail-location">Select a result to see its details.</p>
+          <div class="route-visual" role="img" aria-label="Schematic trail route illustration, not a geographic map">
+            <span class="map-chip"><span aria-hidden="true">⌖</span> SCHEMATIC ROUTE</span>
+            <svg viewBox="0 0 620 230" preserveAspectRatio="none" aria-hidden="true">
+              <path class="route-shadow" d="M45 185 C95 150 93 130 155 137 S220 112 270 123 S330 103 370 105 S430 78 467 87 S512 43 575 48" />
+              <path class="route-line" d="M45 185 C95 150 93 130 155 137 S220 112 270 123 S330 103 370 105 S430 78 467 87 S512 43 575 48" />
+              <circle cx="45" cy="185" r="8" class="route-start"/><circle cx="575" cy="48" r="10" class="route-end"/>
+            </svg>
+            <span class="route-start-label">START</span><span class="route-end-label">VIEWPOINT</span>
+          </div>
+          <div id="trail-stats" class="trail-stats"></div>
+          <div id="alert-box" class="alert-box">
+            <span class="alert-icon" aria-hidden="true">!</span><div><b>Sample alert information</b><p>Select a trail to view its demo alert entry.</p></div>
+          </div>
+          <div id="alert-source" class="source-line">Alert status and source are sample content.</div>
+          <div class="detail-section">
+            <div class="section-title-row"><h3>Trail overview</h3><span class="section-icon" aria-hidden="true">↗</span></div>
+            <p id="detail-summary" class="overview-copy">Trail descriptions will appear here.</p>
+          </div>
+          <div class="detail-section essentials-section"><div class="section-title-row"><h3>Good to bring</h3><span class="section-icon" aria-hidden="true">＋</span></div><div class="essentials"><span>Water</span><span>Layers</span><span>Snacks</span><span>Hiking shoes</span></div></div>
+          <div class="detail-footer"><span id="detail-source">Trail data: sample dataset</span><span id="detail-updated">Not live</span></div>
+        </section>
+      </div>
+      <section class="nps-panel" aria-labelledby="nps-title">
+        <div class="nps-heading"><div><p class="eyebrow">OFFICIAL PARK UPDATES</p><h2 id="nps-title">Washington national park alerts</h2><p class="nps-intro">Alerts come from the National Park Service API. Coverage is limited to NPS parks and may not include nearby state or local trails.</p></div><a href="https://www.nps.gov/subjects/developer/index.htm" target="_blank" rel="noopener noreferrer">NPS API information ↗</a></div>
+        <div class="nps-controls"><label for="nps-api-key">NPS API key</label><input id="nps-api-key" type="password" autocomplete="off" placeholder="Paste your API key"><button id="load-nps-alerts" class="button button-primary" type="button">Load official alerts</button></div>
+        <p class="nps-key-note">Your key is used for this request only and is not saved by the prototype.</p>
+        <div id="nps-status" class="nps-status" role="status" aria-live="polite">Enter an NPS API key to check current Washington park alerts.</div>
+        <div id="nps-alert-list" class="nps-alert-list" aria-live="polite"></div>
+      </section>
+      <footer class="page-footer"><span>TrailWise <span class="footer-divider">·</span> Early prototype</span><span>For planning inspiration. Always confirm trail conditions with official sources.</span></footer>
+    </main>
+  </body>
+</html>
+
