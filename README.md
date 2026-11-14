@@ -1,6 +1,6 @@
 # TrailWise
 
-TrailWise is a responsive web prototype for discovering hikes and reviewing trail details. It is an in-progress CSS 497 capstone project.
+TrailWise is a responsive web prototype for discovering hikes and reviewing trail details. It is an in-progress project.
 
 ## What it includes
 
