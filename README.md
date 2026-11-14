@@ -30,8 +30,3 @@ To try live alerts, enter your NPS API key in the park alerts section. Do not co
 - `app.js` — search, filters, trail details, saved trails, and NPS alert requests
 - `data.js` — sample trail and alert records
 - `data-model.md` — trail/alert fields and data-handling notes
-
-## Status
-
-This is a prototype for coursework and demonstration. Live trail inventory, reliable trail-to-alert matching, backend credential handling, and broader device/accessibility testing remain future work.
-
